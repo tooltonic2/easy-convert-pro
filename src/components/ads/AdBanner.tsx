@@ -23,7 +23,7 @@ const AdBanner = ({
     try {
       // Check if AdSense is loaded
       if (window.adsbygoogle) {
-        // @ts-ignore - AdSense global object
+        // Now TypeScript recognizes adsbygoogle as a valid property
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     } catch (error) {

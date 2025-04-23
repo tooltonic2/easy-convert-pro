@@ -1,6 +1,7 @@
 
 import Layout from '@/components/layout/Layout';
 import UnitConverter from '@/components/converter/UnitConverter';
+import AdBanner from '@/components/ads/AdBanner';
 
 const Index = () => {
   return (
@@ -16,7 +17,13 @@ const Index = () => {
           </p>
         </div>
 
+        {/* Top Ad Banner */}
+        <AdBanner className="mb-6" />
+
         <UnitConverter />
+        
+        {/* Bottom Ad Banner */}
+        <AdBanner className="mt-8" adFormat="horizontal" />
       </div>
     </Layout>
   );

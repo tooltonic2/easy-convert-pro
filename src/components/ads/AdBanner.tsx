@@ -21,9 +21,9 @@ const AdBanner = ({
     }
 
     try {
-      // Check if AdSense is loaded
+      // Check if AdSense is loaded and push the ad
       if (window.adsbygoogle) {
-        window.adsbygoogle.push({});
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     } catch (error) {
       console.error('AdSense error:', error);

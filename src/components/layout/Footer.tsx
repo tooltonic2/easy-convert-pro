@@ -52,6 +52,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
+          <p className="mb-2">Made with ❤️ by Varinder</p>
           <p>© {new Date().getFullYear()} EasyConvertPro. All rights reserved.</p>
         </div>
       </div>

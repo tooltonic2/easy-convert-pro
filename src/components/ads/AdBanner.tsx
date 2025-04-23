@@ -23,8 +23,7 @@ const AdBanner = ({
     try {
       // Check if AdSense is loaded
       if (window.adsbygoogle) {
-        // Now TypeScript recognizes adsbygoogle as a valid property
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        window.adsbygoogle.push({});
       }
     } catch (error) {
       console.error('AdSense error:', error);

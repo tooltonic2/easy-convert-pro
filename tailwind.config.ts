@@ -61,7 +61,18 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+        // Custom premium colors
+        premium: {
+          purple: '#9b87f5',
+          darkPurple: '#7E69AB',
+          deepPurple: '#1A1F2C',
+          lightPurple: '#D6BCFA',
+          neutral: '#8E9196',
+          softGray: '#F1F0FB',
+          bright: '#1EAEDB',
+          charcoal: '#221F26',
+        }
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

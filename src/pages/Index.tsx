@@ -1,13 +1,24 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import Layout from '@/components/layout/Layout';
+import UnitConverter from '@/components/converter/UnitConverter';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <Layout>
+      <div className="container-app py-8 md:py-12">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-3">
+            Easy Unit Converter
+          </h1>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Convert between common units instantly with our simple and accurate conversion tool.
+            Length, weight, temperature, area, and volume - all in one place.
+          </p>
+        </div>
+
+        <UnitConverter />
       </div>
-    </div>
+    </Layout>
   );
 };
 

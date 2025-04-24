@@ -1,4 +1,6 @@
 
 interface Window {
-  adsbygoogle?: any[] | undefined;
+  adsbygoogle: {
+    push: (config?: Record<string, unknown>) => void;
+  }[];
 }

@@ -21,8 +21,8 @@ const AdBanner = ({
     }
 
     try {
-      // Check if AdSense is loaded and push the ad
-      if (window.adsbygoogle) {
+      // Initialize and push ad configuration
+      if (typeof window !== 'undefined') {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       }
     } catch (error) {
@@ -30,7 +30,7 @@ const AdBanner = ({
     }
   }, []);
 
-  // Use a placeholder in development to visualize the ad space
+  // Development placeholder
   if (process.env.NODE_ENV === 'development') {
     return (
       <div 

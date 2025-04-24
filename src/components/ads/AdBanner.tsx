@@ -35,9 +35,7 @@ const AdBanner = ({
         // Correctly initialize the adsbygoogle array
         window.adsbygoogle = window.adsbygoogle || [];
         // Push a configuration object with the correct type
-        window.adsbygoogle.push({
-          google_ad_client: "ca-pub-YOUR_PUBLISHER_ID"
-        });
+        window.adsbygoogle.push({} as Record<string, unknown>);
       }
     } catch (error) {
       console.error('AdSense error:', error);

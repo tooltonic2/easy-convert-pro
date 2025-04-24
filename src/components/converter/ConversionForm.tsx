@@ -1,11 +1,11 @@
 
 import { Unit, UnitCategory } from '@/types/converter';
 import { getUnitsByCategory } from '@/utils/unitData';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
-import { ArrowRight, RefreshCw } from 'lucide-react';
+import ConversionResult from './ConversionResult';
+import ConversionActions from './ConversionActions';
 
 interface ConversionFormProps {
   fromValue: string;
@@ -68,68 +68,26 @@ const ConversionForm = ({
           </Select>
         </div>
         
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium">To</h3>
-            
-            <Button 
-              variant="outline" 
-              size="icon"
-              onClick={onSwapUnits}
-              className="rounded-full h-8 w-8 p-1"
-              title="Swap units"
-            >
-              <ArrowRight className="h-4 w-4 rotate-90" />
-            </Button>
-          </div>
-          
-          <div className="input-display text-xl md:text-2xl p-4 h-[42px] flex items-center justify-end">
-            {result !== null ? (
-              <span>{result}</span>
-            ) : (
-              <span className="text-muted-foreground">Result</span>
-            )}
-          </div>
-          
-          <Select 
-            value={toUnit?.id} 
-            onValueChange={(value) => {
-              const unit = getUnitsByCategory(selectedCategory).find(u => u.id === value);
-              if (unit) onToUnitChange(unit);
-            }}
-          >
-            <SelectTrigger>
-              <SelectValue placeholder="Select unit" />
-            </SelectTrigger>
-            <SelectContent position="popper" className="max-h-[300px] bg-popover">
-              {getUnitsByCategory(selectedCategory).map((unit) => (
-                <SelectItem key={unit.id} value={unit.id}>
-                  {unit.name} ({unit.abbreviation})
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <ConversionResult
+          result={result}
+          toUnit={toUnit}
+          selectedCategory={selectedCategory}
+          onToUnitChange={onToUnitChange}
+          onSwapUnits={onSwapUnits}
+        />
       </div>
 
-      <div className="flex items-center justify-between mt-6">
-        <Button 
-          variant="outline" 
-          className="gap-2"
-          onClick={onReset}
-        >
-          <RefreshCw size={16} />
-          Reset
-        </Button>
-        
-        <Button 
-          onClick={onSave}
-          disabled={result === null}
-          className="gap-2 premium-gradient"
-        >
-          Save to History
-        </Button>
-      </div>
+      <ConversionActions
+        fromUnit={fromUnit}
+        toUnit={toUnit}
+        result={result}
+        selectedCategory={selectedCategory}
+        onReset={onReset}
+        onSwapUnits={onSwapUnits}
+        onSave={onSave}
+        setFromUnit={onFromUnitChange}
+        setToUnit={onToUnitChange}
+      />
     </Card>
   );
 };

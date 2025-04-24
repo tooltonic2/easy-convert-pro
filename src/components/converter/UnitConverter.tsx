@@ -1,7 +1,6 @@
 
 import { Tabs, TabsContent } from '@/components/ui/tabs';
-import { unitCategories, getUnitsByCategory } from '@/utils/unitData';
-import { UnitCategory } from '@/types/converter';
+import { unitCategories } from '@/utils/unitData';
 import { generateId } from '@/utils/conversionLogic';
 import ConversionForm from './ConversionForm';
 import ConversionTabs from './ConversionTabs';
@@ -23,19 +22,6 @@ const UnitConverter = () => {
   } = useUnitConversion();
 
   const { conversionHistory, addToHistory, clearHistory } = useConversionHistory();
-
-  const handleCategoryChange = (category: UnitCategory) => {
-    setSelectedCategory(category);
-  };
-
-  const handleReset = () => {
-    setFromValue('1');
-    const availableUnits = getUnitsByCategory(selectedCategory);
-    if (availableUnits.length >= 2) {
-      setFromUnit(availableUnits[0]);
-      setToUnit(availableUnits[1]);
-    }
-  };
 
   const handleSwapUnits = () => {
     if (fromUnit && toUnit) {
@@ -63,7 +49,7 @@ const UnitConverter = () => {
   return (
     <div>
       <Tabs defaultValue={selectedCategory} className="w-full">
-        <ConversionTabs onCategoryChange={handleCategoryChange} />
+        <ConversionTabs onCategoryChange={setSelectedCategory} />
 
         {unitCategories.map((category) => (
           <TabsContent key={category.id} value={category.id} className="mt-0">
@@ -77,7 +63,7 @@ const UnitConverter = () => {
               onFromUnitChange={setFromUnit}
               onToUnitChange={setToUnit}
               onSwapUnits={handleSwapUnits}
-              onReset={handleReset}
+              onReset={() => setFromValue('1')}
               onSave={saveConversion}
             />
           </TabsContent>

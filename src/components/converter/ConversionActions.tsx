@@ -1,13 +1,13 @@
 
 import { Button } from '@/components/ui/button';
-import { Unit } from '@/types/converter';
+import { Unit, UnitCategory } from '@/types/converter';
 import { getUnitsByCategory } from '@/utils/unitData';
 
 interface ConversionActionsProps {
   fromUnit: Unit | null;
   toUnit: Unit | null;
   result: string | null;
-  selectedCategory: string;
+  selectedCategory: UnitCategory;
   onReset: () => void;
   onSwapUnits: () => void;
   onSave: () => void;

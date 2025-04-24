@@ -23,7 +23,10 @@ const AdBanner = ({
     try {
       // Initialize and push ad configuration
       if (typeof window !== 'undefined') {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        // Initialize the adsbygoogle array if it doesn't exist
+        window.adsbygoogle = window.adsbygoogle || [];
+        // Push the configuration
+        window.adsbygoogle.push({});
       }
     } catch (error) {
       console.error('AdSense error:', error);

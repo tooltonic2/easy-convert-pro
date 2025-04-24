@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  base: "./", // This is crucial for GitHub Pages
+  base: "/easy-convert-pro/", // Updated base path to match your repo name
   plugins: [
     react(),
     mode === 'development' &&

@@ -1,11 +1,13 @@
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { unitCategories, getUnitsByCategory } from '@/utils/unitData';
 import { UnitCategory } from '@/types/converter';
+import { generateId } from '@/utils/conversionLogic';
 import ConversionForm from './ConversionForm';
-import ConversionHistory from './ConversionHistory';
+import ConversionTabs from './ConversionTabs';
+import HistorySection from './HistorySection';
 import { useUnitConversion } from '@/hooks/useUnitConversion';
+import { useConversionHistory } from '@/hooks/useConversionHistory';
 
 const UnitConverter = () => {
   const {
@@ -14,13 +16,13 @@ const UnitConverter = () => {
     fromUnit,
     toUnit,
     result,
-    conversionHistory,
     setSelectedCategory,
     setFromValue,
     setFromUnit,
     setToUnit,
-    setConversionHistory
   } = useUnitConversion();
+
+  const { conversionHistory, addToHistory, clearHistory } = useConversionHistory();
 
   const handleCategoryChange = (category: UnitCategory) => {
     setSelectedCategory(category);
@@ -54,24 +56,14 @@ const UnitConverter = () => {
         timestamp: new Date()
       };
       
-      setConversionHistory(prev => [newConversion, ...prev].slice(0, 10));
+      addToHistory(newConversion);
     }
-  };
-
-  const clearHistory = () => {
-    setConversionHistory([]);
   };
 
   return (
     <div>
-      <Tabs defaultValue={selectedCategory} className="w-full" onValueChange={(value) => handleCategoryChange(value as UnitCategory)}>
-        <TabsList className="grid grid-cols-3 md:grid-cols-5 mb-6">
-          {unitCategories.map((category) => (
-            <TabsTrigger key={category.id} value={category.id}>
-              {category.name}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+      <Tabs defaultValue={selectedCategory} className="w-full">
+        <ConversionTabs onCategoryChange={handleCategoryChange} />
 
         {unitCategories.map((category) => (
           <TabsContent key={category.id} value={category.id} className="mt-0">
@@ -92,22 +84,10 @@ const UnitConverter = () => {
         ))}
       </Tabs>
 
-      {conversionHistory.length > 0 && (
-        <div className="mt-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold">Recent Conversions</h2>
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={clearHistory}
-            >
-              Clear History
-            </Button>
-          </div>
-          <Separator className="my-4" />
-          <ConversionHistory history={conversionHistory} />
-        </div>
-      )}
+      <HistorySection 
+        history={conversionHistory}
+        onClearHistory={clearHistory}
+      />
     </div>
   );
 };

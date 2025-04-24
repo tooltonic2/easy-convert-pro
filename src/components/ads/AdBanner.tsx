@@ -34,7 +34,7 @@ const AdBanner = ({
       if (typeof window !== 'undefined') {
         // Initialize the adsbygoogle array if it doesn't exist
         window.adsbygoogle = window.adsbygoogle || [];
-        // Push the configuration
+        // Push the configuration with an empty object
         window.adsbygoogle.push({});
       }
     } catch (error) {
@@ -69,3 +69,4 @@ const AdBanner = ({
 };
 
 export default AdBanner;
+

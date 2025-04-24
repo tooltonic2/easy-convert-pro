@@ -1,12 +1,12 @@
 
 import { useEffect, useRef } from 'react';
 
-// Add type declaration for window.adsbygoogle
+// Improve type declaration for window.adsbygoogle
 declare global {
   interface Window {
-    adsbygoogle: {
+    adsbygoogle: Array<{
       push: (config?: Record<string, unknown>) => void;
-    }[];
+    }>;
   }
 }
 
@@ -32,10 +32,12 @@ const AdBanner = ({
     try {
       // Initialize and push ad configuration
       if (typeof window !== 'undefined') {
-        // Initialize the adsbygoogle array if it doesn't exist
+        // Correctly initialize the adsbygoogle array
         window.adsbygoogle = window.adsbygoogle || [];
-        // Push the configuration with an empty object
-        window.adsbygoogle.push({});
+        // Push a configuration object with the correct type
+        window.adsbygoogle.push({
+          google_ad_client: "ca-pub-YOUR_PUBLISHER_ID"
+        });
       }
     } catch (error) {
       console.error('AdSense error:', error);
@@ -69,4 +71,3 @@ const AdBanner = ({
 };
 
 export default AdBanner;
-
